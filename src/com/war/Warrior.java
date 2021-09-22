@@ -13,15 +13,11 @@ public class Warrior {
         return health > 0;
     }
 
-    public int getDamage() {
-        return damage;
-    }
-
     public void attack(Warrior warrior) {
         warrior.takeDamage(damage);
     }
 
-    public void takeDamage(int damage) {
+    private void takeDamage(int damage) {
         health -= damage;
     }
 }

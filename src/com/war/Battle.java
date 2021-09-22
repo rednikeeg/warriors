@@ -1,7 +1,7 @@
 package com.war;
 
-public class Game {
-    private Game() {
+public class Battle {
+    private Battle() {
     }
 
     public static boolean fight(Warrior w1, Warrior w2) {
