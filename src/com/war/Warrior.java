@@ -4,24 +4,24 @@ public class Warrior {
     protected int health;
     protected int damage;
 
-    public Warrior(){
+    public Warrior() {
         health = 50;
         damage = 5;
     }
 
-    public boolean isAlive(){
+    public boolean isAlive() {
         return health > 0;
     }
 
-    public int getDamage(){
+    public int getDamage() {
         return damage;
     }
 
-    public void attack(Warrior warrior){
+    public void attack(Warrior warrior) {
         warrior.takeDamage(damage);
     }
 
-    public void takeDamage(int damage){
+    public void takeDamage(int damage) {
         health -= damage;
     }
 }
