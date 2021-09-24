@@ -17,7 +17,7 @@ public class Warrior {
         warrior.takeDamage(damage);
     }
 
-    private void takeDamage(int damage) {
+    protected void takeDamage(int damage) {
         health -= damage;
     }
 }
