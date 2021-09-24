@@ -51,11 +51,33 @@ class BattleTest {
         assertTrue(result);
     }
 
+    @Test
+    @DisplayName("Warrior vs Defender assume false")
+    void fight5() {
+        Warrior w1 = new Warrior();
+        Warrior w2 = new Defender();
+
+        boolean result = Battle.fight(w1, w2);
+
+        assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Defender vs Knight assume false")
+    void fight6() {
+        Warrior w1 = new Defender();
+        Warrior w2 = new Knight();
+
+        boolean result = Battle.fight(w1, w2);
+
+        assertFalse(result);
+    }
+
     // Testing Armies
 
     @Test
     @DisplayName("1 Warrior vs 2 Warriors assume false")
-    void fight5() throws ReflectiveOperationException {
+    void fightArmy1() throws ReflectiveOperationException {
         Army a1 = new Army(Warrior.class, 1);
         Army a2 = new Army(Warrior.class, 2);
 
@@ -66,7 +88,7 @@ class BattleTest {
 
     @Test
     @DisplayName("2 Warriors vs 2 Warriors assume true")
-    void fight6() throws ReflectiveOperationException {
+    void fightArmy2() throws ReflectiveOperationException {
         Army a1 = new Army(Warrior.class, 2);
         Army a2 = new Army(Warrior.class, 2);
 
@@ -77,7 +99,7 @@ class BattleTest {
 
     @Test
     @DisplayName("2 Knight vs 2 Warriors assume true")
-    void fight7() throws ReflectiveOperationException {
+    void fightArmy3() throws ReflectiveOperationException {
         Army a1 = new Army(Knight.class, 2);
         Army a2 = new Army(Warrior.class, 2);
 
@@ -88,9 +110,31 @@ class BattleTest {
 
     @Test
     @DisplayName("2 Warriors vs 2 Knights assume false")
-    void fight8() throws ReflectiveOperationException {
+    void fightArmy4() throws ReflectiveOperationException {
         Army a1 = new Army(Warrior.class, 2);
         Army a2 = new Army(Knight.class, 2);
+
+        boolean result = Battle.fight(a1, a2);
+
+        assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("10 Warriors vs 2 Knights assume true")
+    void fightArmy5() throws ReflectiveOperationException {
+        Army a1 = new Army(Warrior.class, 10);
+        Army a2 = new Army(Knight.class, 2);
+
+        boolean result = Battle.fight(a1, a2);
+
+        assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("100 Warriors vs 100 Defenders assume false")
+    void fightArmy6() throws ReflectiveOperationException {
+        Army a1 = new Army(Warrior.class, 100);
+        Army a2 = new Army(Defender.class, 100);
 
         boolean result = Battle.fight(a1, a2);
 
