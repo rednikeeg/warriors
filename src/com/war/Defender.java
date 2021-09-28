@@ -1,7 +1,7 @@
 package com.war;
 
 public class Defender extends Warrior {
-    private int defense;
+    private final int defense;
 
     public Defender() {
         health = 60;

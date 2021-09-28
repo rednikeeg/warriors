@@ -13,6 +13,11 @@ public class Army {
 
     public Army(Class<? extends Warrior> cls, int quantity) throws ReflectiveOperationException {
         army = new ArrayDeque<>();
+
+        addWarriors(cls, quantity);
+    }
+
+    public void addWarriors(Class<? extends Warrior> cls, int quantity) throws ReflectiveOperationException {
         var constr = cls.getConstructor();
 
         for (int i = 0; i < quantity; i++) {
