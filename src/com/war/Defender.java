@@ -1,16 +1,20 @@
 package com.war;
 
-public class Defender extends Warrior {
-    private final int defense;
-
-    public Defender() {
-        health = 60;
-        damage = 3;
-        defense = 2;
-    }
+public class Defender extends AbstractWarrior {
+    private final int defense = 2;
 
     @Override
     protected void takeDamage(int damage){
         health -= damage - defense;
+    }
+
+    @Override
+    protected int getMaxHealth() {
+        return 60;
+    }
+
+    @Override
+    protected int getDamage() {
+        return 3;
     }
 }

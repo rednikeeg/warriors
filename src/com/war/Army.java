@@ -1,34 +1,32 @@
 package com.war;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Optional;
+import java.util.*;
 
 public class Army {
-    private Deque<Warrior> army;
+    private Deque<AbstractWarrior> army;
 
     public Army() {
 
     }
 
-    public Army(Class<? extends Warrior> cls, int quantity) throws ReflectiveOperationException {
-        army = new ArrayDeque<>();
+    public Army(Class<? extends AbstractWarrior> cls, int quantity) throws ReflectiveOperationException {
+        army = new LinkedList<>();
 
-        addWarriors(cls, quantity);
+        addAbstractWarriors(cls, quantity);
     }
 
-    public void addWarriors(Class<? extends Warrior> cls, int quantity) throws ReflectiveOperationException {
+    public void addAbstractWarriors(Class<? extends AbstractWarrior> cls, int quantity) throws ReflectiveOperationException {
         var constr = cls.getConstructor();
 
         for (int i = 0; i < quantity; i++) {
-            Warrior warrior = constr.newInstance();
+            AbstractWarrior abstractWarrior = constr.newInstance();
 
-            army.add(warrior);
+            army.add(abstractWarrior);
         }
     }
 
-    public Optional<Warrior> next() {
-        Optional<Warrior> result;
+    public Optional<AbstractWarrior> next() {
+        Optional<AbstractWarrior> result;
 
         if (!army.isEmpty())
             result = Optional.of(army.poll());

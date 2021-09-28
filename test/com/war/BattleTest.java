@@ -10,8 +10,8 @@ class BattleTest {
     @Test
     @DisplayName("Warrior vs Knight assume false")
     void fight1() {
-        Warrior john = new Warrior();
-        Warrior freddie = new Knight();
+        AbstractWarrior john = new Warrior();
+        AbstractWarrior freddie = new Knight();
 
         boolean result = Battle.fight(john, freddie);
 
@@ -21,8 +21,8 @@ class BattleTest {
     @Test
     @DisplayName("Warrior vs Warrior assume true")
     void fight2() {
-        Warrior clement = new Warrior();
-        Warrior henry = new Warrior();
+        AbstractWarrior clement = new Warrior();
+        AbstractWarrior henry = new Warrior();
 
         boolean result = Battle.fight(clement, henry);
 
@@ -32,8 +32,8 @@ class BattleTest {
     @Test
     @DisplayName("Knight vs Warrior assume true")
     void fight3() {
-        Warrior jonathan = new Knight();
-        Warrior kira = new Warrior();
+        AbstractWarrior jonathan = new Knight();
+        AbstractWarrior kira = new Warrior();
 
         boolean result = Battle.fight(jonathan, kira);
 
@@ -43,8 +43,8 @@ class BattleTest {
     @Test
     @DisplayName("Knight vs Knight assume true")
     void fight4() {
-        Warrior hans = new Knight();
-        Warrior franz = new Knight();
+        AbstractWarrior hans = new Knight();
+        AbstractWarrior franz = new Knight();
 
         boolean result = Battle.fight(hans, franz);
 
@@ -54,8 +54,8 @@ class BattleTest {
     @Test
     @DisplayName("Warrior vs Defender assume false")
     void fight5() {
-        Warrior w1 = new Warrior();
-        Warrior w2 = new Defender();
+        AbstractWarrior w1 = new Warrior();
+        AbstractWarrior w2 = new Defender();
 
         boolean result = Battle.fight(w1, w2);
 
@@ -65,8 +65,8 @@ class BattleTest {
     @Test
     @DisplayName("Defender vs Knight assume false")
     void fight6() {
-        Warrior w1 = new Defender();
-        Warrior w2 = new Knight();
+        AbstractWarrior w1 = new Defender();
+        AbstractWarrior w2 = new Knight();
 
         boolean result = Battle.fight(w1, w2);
 
