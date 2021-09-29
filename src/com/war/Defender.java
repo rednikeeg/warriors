@@ -4,8 +4,12 @@ public class Defender extends AbstractWarrior {
     private final int defense = 2;
 
     @Override
-    protected void takeDamage(int damage){
+    protected int takeDamage(int damage){
         health -= damage - defense;
+        if(isAlive())
+            return damage - defense;
+        else
+            return health + damage - defense;
     }
 
     @Override
