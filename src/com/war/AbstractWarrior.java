@@ -21,8 +21,12 @@ public abstract class AbstractWarrior {
         damage = getDamage();
     }
 
-    protected void takeDamage(int damage) {
+    protected int takeDamage(int damage) {
         health -= damage;
+        if(isAlive())
+            return damage;
+        else
+            return health + damage;
     }
 
     protected boolean isAlive() {
