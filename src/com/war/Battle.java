@@ -1,5 +1,6 @@
 package com.war;
 
+import java.util.Deque;
 import java.util.Optional;
 
 public class Battle {
@@ -18,17 +19,27 @@ public class Battle {
     }
 
     public static boolean fight(Army a1, Army a2) {
-        Optional<AbstractWarrior> w1 = a1.next();
-        Optional<AbstractWarrior> w2 = a2.next();
-        while (w1.isPresent() && w2.isPresent()) {
-            fight(w1.get(), w2.get());
+        final int MAX_SIZE = 2;
+        Squad squad1 = new Squad(a1, MAX_SIZE);
+        Squad squad2 = new Squad(a2, MAX_SIZE);
 
-            if (!w1.get().isAlive())
-                w1 = a1.next();
-            else if (!w2.get().isAlive())
-                w2 = a2.next();
+        return fight(squad1, squad2);
+    }
+
+    public static boolean fight(Squad s1, Squad s2) {
+        while(s1.turn() && s2.turn()) {
+            if (s1.isMultiFighter()) {
+                MultiFighter.multiFighter(s1.peek()).attack(s2);
+            } else {
+                s1.peek().attack(s2.peek());
+            }
+            if (s2.isAlive() && s2.isMultiFighter()) {
+                MultiFighter.multiFighter(s2.peek()).attack(s1);
+            } else if (s2.peek().isAlive()) {
+                s2.peek().attack(s1.peek());
+            }
         }
 
-        return w1.isPresent();
+        return s1.isAlive();
     }
 }

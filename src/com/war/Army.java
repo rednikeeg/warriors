@@ -2,16 +2,15 @@ package com.war;
 
 import java.util.*;
 
-public class Army {
+public class Army implements Iterable<AbstractWarrior> {
     private Deque<AbstractWarrior> army;
 
     public Army() {
-
+        army = new LinkedList<>();
     }
 
     public Army(Class<? extends AbstractWarrior> cls, int quantity) throws ReflectiveOperationException {
-        army = new LinkedList<>();
-
+        this();
         addAbstractWarriors(cls, quantity);
     }
 
@@ -25,14 +24,16 @@ public class Army {
         }
     }
 
-    public Optional<AbstractWarrior> next() {
-        Optional<AbstractWarrior> result;
+    public AbstractWarrior next() {
+        return army.poll();
+    }
 
-        if (!army.isEmpty())
-            result = Optional.of(army.poll());
-        else
-            result = Optional.empty();
+    public boolean hasNext() {
+        return !army.isEmpty();
+    }
 
-        return result;
+    @Override
+    public Iterator<AbstractWarrior> iterator() {
+        return army.iterator();
     }
 }
