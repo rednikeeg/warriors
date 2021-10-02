@@ -1,6 +1,5 @@
 package com.war;
 
-import java.util.Deque;
 import java.util.Optional;
 
 public class Battle {
@@ -19,7 +18,7 @@ public class Battle {
     }
 
     public static boolean fight(Army a1, Army a2) {
-        final int MAX_SIZE = 2;
+        final int MAX_SIZE = 3;
         Squad squad1 = new Squad(a1, MAX_SIZE);
         Squad squad2 = new Squad(a2, MAX_SIZE);
 
@@ -28,6 +27,9 @@ public class Battle {
 
     public static boolean fight(Squad s1, Squad s2) {
         while(s1.turn() && s2.turn()) {
+            healing(s1);
+            healing(s2);
+
             if (s1.isMultiFighter()) {
                 MultiFighter.multiFighter(s1.peek()).attack(s2);
             } else {
@@ -41,5 +43,15 @@ public class Battle {
         }
 
         return s1.isAlive();
+    }
+
+    public static void healing(Squad s) {
+        Optional<AbstractWarrior> previous = Optional.empty();
+        for(var w : s) {
+            if(previous.isPresent() && w instanceof Healer healer)
+                healer.heal(previous.get());
+
+            previous = Optional.of(w);
+        }
     }
 }

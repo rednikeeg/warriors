@@ -140,4 +140,18 @@ class BattleTest {
 
         assertFalse(result);
     }
+
+    @Test
+    @DisplayName("Warrior vs Warrior and Healer assume false")
+    void fightArmy7() throws ReflectiveOperationException {
+        Army a1 = new Army(Warrior.class, 1);
+        Army a2 = new Army(Warrior.class, 1);
+
+        a2.addWarriors(Medic.class, 1);
+        AbstractWarrior w = new Medic();
+
+        boolean result = Battle.fight(a1, a2);
+
+        assertFalse(result);
+    }
 }

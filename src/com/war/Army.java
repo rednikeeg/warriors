@@ -11,16 +11,16 @@ public class Army implements Iterable<AbstractWarrior> {
 
     public Army(Class<? extends AbstractWarrior> cls, int quantity) throws ReflectiveOperationException {
         this();
-        addAbstractWarriors(cls, quantity);
+        addWarriors(cls, quantity);
     }
 
-    public void addAbstractWarriors(Class<? extends AbstractWarrior> cls, int quantity) throws ReflectiveOperationException {
+    public void addWarriors(Class<? extends AbstractWarrior> cls, int quantity) throws ReflectiveOperationException {
         var constr = cls.getConstructor();
 
         for (int i = 0; i < quantity; i++) {
             AbstractWarrior abstractWarrior = constr.newInstance();
 
-            army.add(abstractWarrior);
+            army.push(abstractWarrior);
         }
     }
 
@@ -30,6 +30,10 @@ public class Army implements Iterable<AbstractWarrior> {
 
     public boolean hasNext() {
         return !army.isEmpty();
+    }
+
+    public int getSize() {
+        return army.size();
     }
 
     @Override

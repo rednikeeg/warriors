@@ -29,7 +29,16 @@ public abstract class AbstractWarrior {
             return health + damage;
     }
 
-    protected boolean isAlive() {
+    public void getHealing(int healAmount) {
+        if(health + healAmount < getMaxHealth()) {
+            health += healAmount;
+        }
+        else {
+            health = getMaxHealth();
+        }
+    }
+
+    public boolean isAlive() {
         return health > 0;
     }
 
