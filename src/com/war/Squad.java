@@ -14,6 +14,10 @@ public class Squad implements Iterable<AbstractWarrior> {
         MAX_SIZE = 0;
     }
 
+    public Squad(Army a) {
+        MAX_SIZE = a.getSize();
+    }
+
     public Squad(Army army, int MAX_SIZE) {
         warriors = new LinkedList<>();
         this.army = army;
@@ -22,7 +26,8 @@ public class Squad implements Iterable<AbstractWarrior> {
 
     public boolean turn() {
         clearDead();
-        push(army);
+        if(warriors.size() < MAX_SIZE && warriors.size() < army.getSize())
+            push(army);
 
         return isAlive();
     }
@@ -40,12 +45,20 @@ public class Squad implements Iterable<AbstractWarrior> {
         return warriors.peek();
     }
 
+    public AbstractWarrior remove() {
+        return warriors.remove();
+    }
+
     public boolean isMultiFighter() {
         return warriors.peek() instanceof MultiFighter;
     }
 
     public boolean isAlive() {
         return !warriors.isEmpty() && warriors.peek().isAlive();
+    }
+
+    public boolean areAllHealers() {
+        return warriors.stream().allMatch(v -> v instanceof Healer);
     }
 
     @Override

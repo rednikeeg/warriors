@@ -14,7 +14,7 @@ public class Army implements Iterable<AbstractWarrior> {
         addWarriors(cls, quantity);
     }
 
-    public void addWarriors(Class<? extends AbstractWarrior> cls, int quantity) throws ReflectiveOperationException {
+    public Army addWarriors(Class<? extends AbstractWarrior> cls, int quantity) throws ReflectiveOperationException {
         var constr = cls.getConstructor();
 
         for (int i = 0; i < quantity; i++) {
@@ -22,6 +22,8 @@ public class Army implements Iterable<AbstractWarrior> {
 
             army.add(abstractWarrior);
         }
+
+        return this;
     }
 
     public AbstractWarrior next() {

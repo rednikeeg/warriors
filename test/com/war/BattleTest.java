@@ -145,12 +145,22 @@ class BattleTest {
     @DisplayName("Warrior vs Warrior and Healer assume false")
     void fightArmy7() throws ReflectiveOperationException {
         Army a1 = new Army(Warrior.class, 1);
-        Army a2 = new Army(Warrior.class, 1);
-
-        a2.addWarriors(Medic.class, 1);
-        AbstractWarrior w = new Medic();
+        Army a2 = new Army(Warrior.class, 1).addWarriors(Medic.class, 1);
 
         boolean result = Battle.fight(a1, a2);
+
+        assertFalse(result);
+    }
+
+    // Test straight fight
+
+    @Test
+    @DisplayName("4 Warriors vs 1 Knight and 3 Warriors straight assume false")
+    void fightStraight1() throws ReflectiveOperationException {
+        Army a1 = new Army(Warrior.class, 4);
+        Army a2 = new Army(Knight.class, 1).addWarriors(Warrior.class, 3);
+
+        boolean result = Battle.straightFight(a1, a2);
 
         assertFalse(result);
     }
