@@ -33,7 +33,7 @@ public class Squad implements Iterable<AbstractWarrior> {
 
     public void push(Army a) {
         while(army.hasNext() && warriors.size() < MAX_SIZE)
-            warriors.push(army.next());
+            warriors.add(army.next());
     }
 
     public AbstractWarrior peek() {

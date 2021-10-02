@@ -20,7 +20,7 @@ public class Army implements Iterable<AbstractWarrior> {
         for (int i = 0; i < quantity; i++) {
             AbstractWarrior abstractWarrior = constr.newInstance();
 
-            army.push(abstractWarrior);
+            army.add(abstractWarrior);
         }
     }
 
