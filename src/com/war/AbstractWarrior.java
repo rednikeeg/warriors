@@ -3,8 +3,20 @@ package com.war;
 public abstract class AbstractWarrior {
     protected int damage;
     protected int health;
+    protected Weapon weapon;
 
     public AbstractWarrior() {
+        this(Weapon.Custom);
+    }
+
+    public AbstractWarrior(Weapon weapon) {
+        this.weapon = weapon;
+        setHealth();
+        setDamage();
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
         setHealth();
         setDamage();
     }
@@ -32,8 +44,7 @@ public abstract class AbstractWarrior {
     public void getHealing(int healAmount) {
         if(health + healAmount < getMaxHealth()) {
             health += healAmount;
-        }
-        else {
+        } else {
             health = getMaxHealth();
         }
     }
@@ -42,7 +53,18 @@ public abstract class AbstractWarrior {
         return health > 0;
     }
 
-    protected abstract int getMaxHealth();
+    protected abstract int getBaseHealth();
 
-    protected abstract int getDamage();
+    protected int getMaxHealth() {
+        return getBaseHealth() + weapon.getHealth();
+    }
+
+    protected abstract int getBaseDamage();
+
+    protected int getDamage() {
+        return getBaseDamage() + weapon.getDamage();
+    }
+
+    @Override
+    public abstract AbstractWarrior clone();
 }

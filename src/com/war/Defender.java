@@ -1,24 +1,48 @@
 package com.war;
 
 public class Defender extends AbstractWarrior {
-    private final int defense = 2;
+    public Defender () {
 
-    @Override
-    protected int takeDamage(int damage){
-        health -= damage - defense;
-        if(isAlive())
-            return damage - defense;
-        else
-            return health + damage - defense;
+    }
+
+    public Defender(Weapon weapon) {
+        super(weapon);
     }
 
     @Override
-    protected int getMaxHealth() {
+    protected int takeDamage(int damage){
+        health -= damage - getDefense();
+        if(isAlive())
+            return damage - getDefense();
+        else
+            return health + damage - getDefense();
+    }
+
+    private int getBaseDefense() {
+        return 2;
+    }
+
+    private int getDefense() {
+        return getBaseDefense() + weapon.getDefense();
+    }
+
+    @Override
+    protected int getBaseHealth() {
         return 60;
     }
 
     @Override
-    protected int getDamage() {
+    protected int getBaseDamage() {
         return 3;
+    }
+
+    @Override
+    public Defender clone() {
+        Defender defender = new Defender(weapon);
+
+        defender.health = this.health;
+        defender.damage = this.damage;
+
+        return defender;
     }
 }

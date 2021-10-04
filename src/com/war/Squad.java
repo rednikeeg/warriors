@@ -15,7 +15,7 @@ public class Squad implements Iterable<AbstractWarrior> {
     }
 
     public Squad(Army a) {
-        MAX_SIZE = a.getSize();
+        this(a, a.getSize());
     }
 
     public Squad(Army army, int MAX_SIZE) {

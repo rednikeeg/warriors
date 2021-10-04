@@ -155,12 +155,37 @@ class BattleTest {
     // Test straight fight
 
     @Test
-    @DisplayName("4 Warriors vs 1 Knight and 3 Warriors straight assume false")
+    @DisplayName("4 Warriors vs 2 Knights and 2 Warriors straight assume false")
     void fightStraight1() throws ReflectiveOperationException {
         Army a1 = new Army(Warrior.class, 4);
-        Army a2 = new Army(Knight.class, 1).addWarriors(Warrior.class, 3);
+        Army a2 = new Army(Knight.class, 2).addWarriors(Warrior.class, 2);
 
         boolean result = Battle.straightFight(a1, a2);
+
+        assertFalse(result);
+    }
+
+    // Test weapon
+
+    @Test
+    @DisplayName("Knight vs Warrior with Magic Wand assume false")
+    void fightWeapon1() {
+        AbstractWarrior aw1 = new Knight();
+        AbstractWarrior aw2 = new Warrior(Weapon.MagicWand);
+
+        boolean result = Battle.fight(aw1, aw2);
+
+        assertFalse(result);
+    }
+    @Test
+    @DisplayName("Warrior vs Warrior with Sword assume false")
+    void fightWeapon2() {
+        AbstractWarrior aw1 = new Warrior();
+        AbstractWarrior aw2 = new Warrior();
+
+        aw2.setWeapon(Weapon.Sword);
+
+        boolean result = Battle.fight(aw1, aw2);
 
         assertFalse(result);
     }
