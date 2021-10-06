@@ -1,6 +1,6 @@
 package com.war;
 
-public abstract class AbstractWarrior {
+public abstract class AbstractWarrior implements Comparable<AbstractWarrior> {
     protected int damage;
     protected int health;
     protected Weapon weapon;
@@ -66,5 +66,48 @@ public abstract class AbstractWarrior {
     }
 
     @Override
+    public int compareTo(AbstractWarrior aw) {
+        if(this instanceof Warlord) {
+            return 1;
+        }
+        else if(this instanceof Lancer) {
+            if(aw instanceof Healer)
+                return 1;
+            else if(aw instanceof Lancer)
+                return 0;
+            else
+                return -1;
+        }
+        else if(this instanceof Healer) {
+            if(aw instanceof Healer)
+                return 0;
+            else
+                return -1;
+        }
+        else {
+            if(aw instanceof Healer)
+                return 1;
+            else if(aw instanceof Lancer)
+                return 1;
+            else if(aw instanceof Warlord)
+                return -1;
+            else
+                return 0;
+        }
+    }
+
+    @Override
     public abstract AbstractWarrior clone();
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) {
+            return true;
+        }
+        if(!(o instanceof AbstractWarrior)) {
+            return false;
+        }
+
+        return this.getClass() == o.getClass();
+    }
 }

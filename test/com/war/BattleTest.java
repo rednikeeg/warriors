@@ -145,7 +145,8 @@ class BattleTest {
     @DisplayName("Warrior vs Warrior and Healer assume false")
     void fightArmy7() throws ReflectiveOperationException {
         Army a1 = new Army(Warrior.class, 1);
-        Army a2 = new Army(Warrior.class, 1).addWarriors(Medic.class, 1);
+        Army a2 = new Army(Warrior.class, 1)
+                .addWarriors(Medic.class, 1);
 
         boolean result = Battle.fight(a1, a2);
 
@@ -158,7 +159,8 @@ class BattleTest {
     @DisplayName("4 Warriors vs 2 Knights and 2 Warriors straight assume false")
     void fightStraight1() throws ReflectiveOperationException {
         Army a1 = new Army(Warrior.class, 4);
-        Army a2 = new Army(Knight.class, 2).addWarriors(Warrior.class, 2);
+        Army a2 = new Army(Knight.class, 2)
+                .addWarriors(Warrior.class, 2);
 
         boolean result = Battle.straightFight(a1, a2);
 
@@ -188,5 +190,32 @@ class BattleTest {
         boolean result = Battle.fight(aw1, aw2);
 
         assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Testing moveWarriors() method 3")
+    void moveWarriors1() throws ReflectiveOperationException {
+        Army a1 = new Army(Warlord.class, 2)
+                .addWarriors(Lancer.class, 3)
+                .addWarriors(Medic.class, 3);
+        Army a2 = new Army(Warlord.class, 1)
+                .addWarriors(Medic.class, 3)
+                .addWarriors(Lancer.class, 3);
+
+        assertArrayEquals(a1.content.toArray(), a2.content.toArray());
+    }
+    @Test
+    @DisplayName("Testing moveWarriors() method 2")
+    void moveWarriors2() throws ReflectiveOperationException {
+        Army a1 = new Army(Warlord.class, 2)
+                .addWarriors(Lancer.class, 3)
+                .addWarriors(Medic.class, 3)
+                .addWarriors(Vampire.class, 3);
+        Army a2 = new Army(Warlord.class, 2)
+                .addWarriors(Vampire.class, 3)
+                .addWarriors(Medic.class, 3)
+                .addWarriors(Lancer.class, 3);
+
+        assertArrayEquals(a1.content.toArray(), a2.content.toArray());
     }
 }
