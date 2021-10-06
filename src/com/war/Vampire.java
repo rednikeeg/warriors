@@ -1,6 +1,6 @@
 package com.war;
 
-public class Vampire extends AbstractWarrior {
+public class Vampire extends AbstractWarrior implements Vampiric {
     public Vampire() {
 
     }
@@ -8,6 +8,7 @@ public class Vampire extends AbstractWarrior {
     public Vampire(Weapon weapon) {
         super(weapon);
     }
+
     @Override
     public void attack(AbstractWarrior abstractWarrior) {
         int toRestore = abstractWarrior.takeDamage(damage) * getVampirism() / 100;
@@ -17,6 +18,17 @@ public class Vampire extends AbstractWarrior {
         else
             health = getMaxHealth();
     }
+
+    @Override
+    public int getVampirism() {
+        return getBaseVampirism() + weapon.getVampirism();
+    }
+
+    @Override
+    public int getBaseVampirism() {
+        return 50;
+    }
+
     @Override
     protected int getBaseHealth() {
         return 40;
@@ -25,14 +37,6 @@ public class Vampire extends AbstractWarrior {
     @Override
     protected int getBaseDamage() {
         return 4;
-    }
-
-    private int getBaseVampirism() {
-        return 50;
-    }
-
-    private int getVampirism() {
-        return getBaseVampirism() + weapon.getVampirism();
     }
 
     @Override

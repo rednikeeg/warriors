@@ -1,6 +1,6 @@
 package com.war;
 
-public class Defender extends AbstractWarrior {
+public class Defender extends AbstractWarrior implements Defensive {
     public Defender () {
 
     }
@@ -10,7 +10,7 @@ public class Defender extends AbstractWarrior {
     }
 
     @Override
-    protected int takeDamage(int damage){
+    public int takeDamage(int damage) {
         health -= damage - getDefense();
         if(isAlive())
             return damage - getDefense();
@@ -18,12 +18,14 @@ public class Defender extends AbstractWarrior {
             return health + damage - getDefense();
     }
 
-    private int getBaseDefense() {
-        return 2;
+    @Override
+    public int getDefense() {
+        return getBaseDefense() + weapon.getDefense();
     }
 
-    private int getDefense() {
-        return getBaseDefense() + weapon.getDefense();
+    @Override
+    public int getBaseDefense() {
+        return 2;
     }
 
     @Override
