@@ -3,6 +3,15 @@ package com.war;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * The class represents collection of AbstractWarriors, backed by LinkedList, which provides FIFO logic for insertion
+ * and deletion
+ *
+ * @author Maksym Bohachov
+ * @see AbstractWarrior
+ * @see Squad
+ * @see Battle
+ */
 public class Army implements Iterable<AbstractWarrior> {
     LinkedList<AbstractWarrior> content;
 
@@ -13,10 +22,6 @@ public class Army implements Iterable<AbstractWarrior> {
     public Army(Class<? extends AbstractWarrior> cls, int quantity) throws ReflectiveOperationException {
         this();
         addWarriors(cls, quantity);
-    }
-
-    private Army(LinkedList<AbstractWarrior> content) {
-        this.content = content;
     }
 
     public Army addWarriors(Class<? extends AbstractWarrior> cls, int quantity) throws ReflectiveOperationException {
@@ -77,7 +82,6 @@ public class Army implements Iterable<AbstractWarrior> {
                 return current;
             }
         }
-
         return null;
     }
 
@@ -94,23 +98,6 @@ public class Army implements Iterable<AbstractWarrior> {
         content = content.stream()
                 .filter(AbstractWarrior::isAlive)
                 .collect(Collectors.toCollection(LinkedList::new));
-    }
-
-
-
-    /**
-     *
-     * @deprecated
-     */
-    AbstractWarrior next() {
-        return content.poll();
-    }
-
-    /**
-     * @deprecated
-     */
-    boolean hasNext() {
-        return !content.isEmpty();
     }
 
     public int getSize() {

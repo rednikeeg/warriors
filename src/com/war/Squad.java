@@ -2,6 +2,14 @@ package com.war;
 
 import java.util.Iterator;
 
+/**
+ * The class is Army's wrapper, that provides view on certain Army.
+ *
+ * @author Maksym Bohachov
+ * @see Army
+ * @see AbstractWarrior
+ * @see Battle
+ */
 public class Squad implements Iterable<AbstractWarrior> {
     private final int MAX_SIZE;
     private Army army;
@@ -19,6 +27,11 @@ public class Squad implements Iterable<AbstractWarrior> {
         this.MAX_SIZE = MAX_SIZE;
     }
 
+
+    /**
+     * Returns
+     * @return true if
+     */
     public boolean turn() {
         clearDead();
 

@@ -75,7 +75,7 @@ public class Battle {
         return straightFight(s1, s2);
     }
 
-    public static boolean straightFight(Squad s1, Squad s2) {
+    static boolean straightFight(Squad s1, Squad s2) {
         do {
             var iterator1 = s1.iterator();
             var iterator2 = s2.iterator();

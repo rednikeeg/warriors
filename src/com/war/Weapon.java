@@ -1,13 +1,12 @@
 package com.war;
 
+/**
+ * The enum implements Weapon logic, provides methods to work with additional parameters, that weapons give.
+ *
+ * @author Maksym Bohachov
+ * @see AbstractWarrior
+ */
 public enum Weapon {
-    /*
-    Sword - health +5, attack +2<br>
-    Shield - health +20, attack -1, defense +2<br>
-    GreatAxe - health -15, attack +5, defense -2, vampirism +10%<br>
-    Katana - health -20, attack +6, defense -5, vampirism +50%<br>
-    MagicWand - health +30, attack +3, heal_power +3<br>
-     */
     Sword(5, 2, 0, 0, 0),
     Shield(20, -1, 2, 0, 0),
     GreatAxe(-15, 5, -2, 10, 0),
