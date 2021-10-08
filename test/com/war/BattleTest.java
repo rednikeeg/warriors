@@ -193,6 +193,36 @@ class BattleTest {
     }
 
     @Test
+    @DisplayName("Warrior vs Warrior with Sword in army assume false")
+    void fightWeapon3() {
+        AbstractWarrior aw1 = new Warrior();
+        AbstractWarrior aw2 = new Warrior();
+
+        aw2.setWeapon(Weapon.Sword);
+
+        Army a1 = new Army().addWarriors(aw1);
+        Army a2 = new Army().addWarriors(aw2);
+
+        boolean result = Battle.fight(a1, a2);
+
+        assertFalse(result);
+    }
+
+    @Test
+    @DisplayName("Warrior vs Warrior with Sword in army assume false")
+    void fightWeapon4() throws ReflectiveOperationException {
+
+        Army a1 = new Army(Warrior.class, 1);
+        Army a2 = new Army(Warrior.class, 1);
+
+        a2.get(0).setWeapon(Weapon.Sword);
+
+        boolean result = Battle.fight(a1, a2);
+
+        assertFalse(result);
+    }
+
+    @Test
     @DisplayName("Testing moveWarriors() method 3")
     void moveWarriors1() throws ReflectiveOperationException {
         Army a1 = new Army(Warlord.class, 2)
